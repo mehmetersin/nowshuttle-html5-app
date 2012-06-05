@@ -6,6 +6,40 @@
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
 	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+
+	
+<script>
+        function onSuccess(data, status)
+        {
+            data = $.trim(data);
+            $("#notification").text(data);
+        }
+ 
+        function onError(data, status)
+        {
+            // handle an error
+        }        
+ 
+        $(document).ready(function() {
+            $("#loginButton").click(function(){
+ 
+ $.ajax({
+                    type: "GET",
+                    url: "http://localhost:8686/NowShuttleWebApi/operations/getShuttles",
+                    cache: false,
+                    data: "",
+                    success: onSuccess,
+                    error: onError
+                });
+ 
+ 
+ 
+                return false;
+            });
+        });
+    </script>
+
+  
 </head> 
 <body> 
 
@@ -19,21 +53,27 @@
 
 	<div data-role="content">	
 		
-<form action="forms-sample-response.php" method="get" >		
-		
-	<div data-role="fieldcontain">
+	
+		<form id="theForm" >
+	
+		<div data-role="fieldcontain">
+	   
 	         <label for="username">Username</label>
 	         <input type="email" name="username" id="username" value=""  />
-			</div>
-	<div data-role="fieldcontain">
+		
+		
 	         <label for="password">Password</label>
 	         <input type="password" name="password" id="password" value=""  />
 			</div>			
-						
-<div class="ui-block-b"><button type="submit" data-theme="a">Signup</button></div>	
-<div class="ui-block-b"><button type="submit" data-theme="a">Login</button></div>	
+					
+					
+						 
+		<div class="ui-block-b"><button id="signUpButton" type="submit" data-theme="a">Signup</a></div>	
+		<div class="ui-block-b"><button id="loginButton" type="submit" data-theme="a">Login</button></div>	
+
+		</form>
 	
-	</form>	
+	
 	</div><!-- /content -->
 
 </div><!-- /page -->
