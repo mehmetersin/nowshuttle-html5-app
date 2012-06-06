@@ -11,8 +11,8 @@
 <script>
         function onSuccess(data, status)
         {
-            data = $.trim(data);
-            $("#notification").text(data);
+				alert('mehmet');            
+            
         }
  
         function onError(data, status)
@@ -22,15 +22,25 @@
  
         $(document).ready(function() {
             $("#loginButton").click(function(){
- 
+
+var jsontext = '{"displayName":"Mehmet","status":"1","password":"1","userId":19,"email":"meh@gmail.com"}';
+
+
  $.ajax({
-                    type: "GET",
-                    url: "http://localhost:8686/NowShuttleWebApi/operations/getShuttles",
-                    cache: false,
-                    data: "",
-                    success: onSuccess,
-                    error: onError
-                });
+ url:"http://localhost:8686/NowShuttleWebApi/operations/checkUser",
+  type:"POST",
+  data:jsontext,
+  contentType:"application/json; charset=utf-8",
+  dataType:"json",
+converters:"text json" ,
+error: function(){
+    alert('hata');
+},
+  success: function(){
+    alert('ffffffff');
+  }
+ });
+
  
  
  
