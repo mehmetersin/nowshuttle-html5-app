@@ -9,35 +9,35 @@
 
 	
 <script>
-        function onSuccess(data, status)
-        {
-				alert('mehmet');            
-            
-        }
- 
-        function onError(data, status)
-        {
-            // handle an error
-        }        
- 
-        $(document).ready(function() {
+        
+$(document).ready(function() {
             $("#loginButton").click(function(){
 
-var jsontext = '{"displayName":"Mehmet","status":"1","password":"1","userId":19,"email":"meh@gmail.com"}';
+       var username = $("#username").val();
+       var password = $("#password").val();
+ 
+alert(username+'--'+password);
+
+
+var jsontext = '{"displayName":"Mehmet","status":"1","password":"'+password+'","userId":19,"email":"'+username+'"}';
 
 
  $.ajax({
- url:"http://localhost:8686/NowShuttleWebApi/operations/checkUser",
+ url:"http://localhost:8080/NowShuttleWebApi/operations/checkUser",
   type:"POST",
   data:jsontext,
   contentType:"application/json; charset=utf-8",
   dataType:"json",
 converters:"text json" ,
-error: function(){
-    alert('hata');
-},
-  success: function(){
-    alert('ffffffff');
+converters: {
+        'jsonp': jQuery.parseJSON,
+    },
+error: function(jqXHR, textStatus, errorThrown) {
+        console.log(JSON.stringify(jqXHR));
+        console.log(textStatus+': '+errorThrown);
+    },
+  success: function(data){
+    alert(data.status);
   }
  });
 
@@ -69,11 +69,11 @@ error: function(){
 		<div data-role="fieldcontain">
 	   
 	         <label for="username">Username</label>
-	         <input type="email" name="username" id="username" value=""  />
+	         <input type="email" id="username" id="username" value=""  />
 		
 		
 	         <label for="password">Password</label>
-	         <input type="password" name="password" id="password" value=""  />
+	         <input type="password" id="password" id="password" value=""  />
 			</div>			
 					
 					
@@ -87,6 +87,8 @@ error: function(){
 	</div><!-- /content -->
 
 </div><!-- /page -->
+
+
 
 </body>
 </html>	
