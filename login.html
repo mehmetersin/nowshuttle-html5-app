@@ -16,14 +16,14 @@ $(document).ready(function() {
        var username = $("#username").val();
        var password = $("#password").val();
  
-alert(username+'--'+password);
+
 
 
 var jsontext = '{"displayName":"Mehmet","status":"1","password":"'+password+'","userId":19,"email":"'+username+'"}';
 
 
  $.ajax({
- url:"http://localhost:8080/NowShuttleWebApi/operations/checkUser",
+ url:"http://localhost:8686/NowShuttleWebApi/operations/checkUser",
   type:"POST",
   data:jsontext,
   contentType:"application/json; charset=utf-8",
@@ -37,7 +37,19 @@ error: function(jqXHR, textStatus, errorThrown) {
         console.log(textStatus+': '+errorThrown);
     },
   success: function(data){
-    alert(data.status);
+
+
+    if ('1'==data.status){
+
+
+
+localStorage.setItem('userState', data.status);
+localStorage.setItem('userUserId', data.userId);
+
+$('#goMenu').click();	
+	}
+
+
   }
  });
 
@@ -69,11 +81,11 @@ error: function(jqXHR, textStatus, errorThrown) {
 		<div data-role="fieldcontain">
 	   
 	         <label for="username">Username</label>
-	         <input type="email" id="username" id="username" value=""  />
+	         <input type="email" name="username" id="username" value=""  />
 		
 		
 	         <label for="password">Password</label>
-	         <input type="password" id="password" id="password" value=""  />
+	         <input type="password" name="password" id="password" value=""  />
 			</div>			
 					
 					
@@ -81,14 +93,15 @@ error: function(jqXHR, textStatus, errorThrown) {
 		<div class="ui-block-b"><button id="signUpButton" type="submit" data-theme="a">Signup</a></div>	
 		<div class="ui-block-b"><button id="loginButton" type="submit" data-theme="a">Login</button></div>	
 
-		</form>
+
+<a href = "menu.html" id = "goMenu" class = "InvisibleLinks"></a>		
+
+</form>
 	
 	
 	</div><!-- /content -->
 
 </div><!-- /page -->
-
-
 
 </body>
 </html>	
