@@ -1,0 +1,121 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>Servis Durumu</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+
+	
+<script type="text/javascript">
+    $(document).ready(function () {
+         $("#topButton").delegate("a", "click", function () {
+         $("div.ui-input-search").find("input").val($(this).text());
+         $("div.ui-input-search").find("input").keyup();
+    });
+</script>
+
+<script>
+        
+
+
+
+
+
+var jsontext = '';
+
+
+ $.ajax({
+ url:"http://localhost:8686/NowShuttleWebApi/operations/getShuttles",
+  type:"GET",
+  data:jsontext,
+  contentType:"application/json; charset=utf-8",
+  dataType:"json",
+converters:"text json" ,
+converters: {
+        'jsonp': jQuery.parseJSON,
+    },
+error: function(jqXHR, textStatus, errorThrown) {
+        alert('error'+JSON.stringify(jqXHR));
+//        console.log(textStatus+': '+errorThrown);
+    },
+  success: function(data){
+
+var list = data.listview();
+
+for (var i = 0; i < data.length; i++) { 
+    alert(data[i].name);
+}
+
+
+
+    if ('1'==data.status){
+
+
+
+localStorage.setItem('userState', data.status);
+localStorage.setItem('userUserId', data.userId);
+
+$('#goMenu').click();	
+	}
+
+
+  }
+ 
+
+ 
+ 
+ 
+
+            });
+
+    </script>
+
+  
+</head> 
+<body> 
+
+
+
+<div data-role="page">
+
+	<div data-role="header">
+		<h1>Login</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">	
+		
+
+
+	<ul data-role="listview" data-filter="true" data-filter-placeholder="Search Workorders...">
+    <li>Search Phase 1 Test<a href="index.html" class="ui-link-inherit"></a></li>
+    <li>Search Phase 1 Test</li>
+    <li>Search Phase 3 Test</li>
+    <li>Search Phase 1 Test</li>
+    <li>Search Phase 1 Test</li>
+    <li>Search Phase 2 Test</li>
+    <li>Search Phase 1 Test</li>
+    <li>Search Phase 1 Test</li>
+    <li>Search Phase 1 Test</li>
+    <li>Search Phase 3 Test</li>
+    <li>Search Phase 1 Test</li>
+    <li>Search Phase 2 Test</li>
+    <li>Search Phase 1 Test</li>
+    <li>Search Phase 2 Test</li>
+    <li>Search Phase 1 Test</li>
+</ul>
+		
+	
+	</div><!-- /content -->
+
+<div data-role="footer" class="ui-bar">
+	<a href="serviceState.html" data-role="button" data-icon="arrow-u">Servis Durumum</a>
+	<a href="index.html" data-role="button" data-icon="arrow-u">Serviste Kimler Var</a>
+	<a href="index.html" data-role="button" data-icon="arrow-u">Ayarlar</a>
+</div>
+
+</div><!-- /page -->
+
+</body>
+</html>	
