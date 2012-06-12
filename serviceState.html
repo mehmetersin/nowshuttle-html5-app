@@ -3,25 +3,26 @@
 	<head> 
 	<title>Servis Durumu</title> 
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
-	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/latest/jquery.mobile.css">
 
 	
-<script type="text/javascript">
-    $(document).ready(function () {
-         $("#topButton").delegate("a", "click", function () {
-         $("div.ui-input-search").find("input").val($(this).text());
-         $("div.ui-input-search").find("input").keyup();
-    });
-</script>
+<link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/latest/jquery.mobile.min.css" />
+<link rel="stylesheet" type="text/css" href="http://dev.jtsage.com/cdn/datebox/latest/jqm-datebox.min.css" /> 
 
-<script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script> 
+<script type="text/javascript" src="http://code.jquery.com/mobile/latest/jquery.mobile.min.js"></script>
+
+<!-- Optional Mousewheel support: http://brandonaaron.net/code/mousewheel/docs -->
+<script type="text/javascript" src="PATH/TO/YOUR/COPY/OF/jquery.mousewheel.min.js"></script>
+
+<script type="text/javascript" src="http://dev.jtsage.com/cdn/datebox/latest/jqm-datebox.core.min.js"></script>
+<script type="text/javascript" src="http://dev.jtsage.com/cdn/datebox/latest/jqm-datebox.mode.calbox.min.js"></script>
+<script type="text/javascript" src="http://dev.jtsage.com/cdn/datebox/i18n/jquery.mobile.datebox.i18n.en_US.utf8.js"></script>
         
 
 
 
-
+<script>
 
 var jsontext = '';
 
@@ -42,10 +43,12 @@ error: function(jqXHR, textStatus, errorThrown) {
     },
   success: function(data){
 
-var list = data.listview();
+
 
 for (var i = 0; i < data.length; i++) { 
-    alert(data[i].name);
+  
+
+$("#shuttles").append("<li class=\"ui-li ui-li-static ui-body-c\">"+data[i].name+"</li>"   );
 }
 
 
@@ -85,27 +88,46 @@ $('#goMenu').click();
 	</div><!-- /header -->
 
 	<div data-role="content">	
-		
+	  <form id="theForm" >
+         	<div data-role="fieldcontain">
+	
 
 
-	<ul data-role="listview" data-filter="true" data-filter-placeholder="Search Workorders...">
-    <li>Search Phase 1 Test<a href="index.html" class="ui-link-inherit"></a></li>
-    <li>Search Phase 1 Test</li>
-    <li>Search Phase 3 Test</li>
-    <li>Search Phase 1 Test</li>
-    <li>Search Phase 1 Test</li>
-    <li>Search Phase 2 Test</li>
-    <li>Search Phase 1 Test</li>
-    <li>Search Phase 1 Test</li>
-    <li>Search Phase 1 Test</li>
-    <li>Search Phase 3 Test</li>
-    <li>Search Phase 1 Test</li>
-    <li>Search Phase 2 Test</li>
-    <li>Search Phase 1 Test</li>
-    <li>Search Phase 2 Test</li>
-    <li>Search Phase 1 Test</li>
-</ul>
-		
+			<ul data-role="listview" data-filter="true" id="shuttles" data-filter-placeholder="Servis Ara...">
+			    <li>Search Phase 1 Test<a href="index.html" class="ui-link-inherit"></a></li>
+			    <li><a href="@jinfo" data-rel="dialog">Open dialog</a></li>
+			    <li><a href="#jinfo" data-inlin="true" data-iconpos="notext" data-rel="dialog" data-transition="pop">test</a></li>
+			    <li>Search Phase 5 Test</li>
+			    
+			</ul>
+                </div>	
+			<label for="mydate">Tarih</label>
+
+<input name="mydate" id="mydate" type="date" data-role="datebox"
+   data-options='{"mode": "calbox"}'>  
+
+
+<div data-role="fieldcontain">
+    <fieldset data-role="controlgroup">
+    	<legend>Durum:</legend>
+         	<input type="radio" name="radio-choice-1" id="radio-choice-1" value="ok" checked="checked" />
+         	<label for="radio-choice-1">Kullanıyorum</label>
+
+         	<input type="radio" name="radio-choice-1" id="radio-choice-2" value="nok"  />
+         	<label for="radio-choice-2">Kullanmıyorum</label>
+
+         	
+    </fieldset>
+</div>
+
+
+  </form>
+
+
+
+	
+	
+	
 	
 	</div><!-- /content -->
 
@@ -116,6 +138,9 @@ $('#goMenu').click();
 </div>
 
 </div><!-- /page -->
+
+
+
 
 </body>
 </html>	
